@@ -16,11 +16,9 @@ class Boundary {
     this.height = 40;
     this.image = image;
   }
-  // Creating the Context of the maze that is wahy there is a c.
+  // Creating the Context of the maze that is why there is a c.
   draw() {
-    // c.fillStyle= 'blue'
-    //c.fillRect(this.position.x, this.position.y, this.width, this.height)
-
+    
     c.drawImage(this.image, this.position.x, this.position.y);
   }
 }
@@ -29,7 +27,7 @@ const SPEED = 175;
 const CHOMP_RATE = 50;
 
 class Player {
-  //this.postion  is just for its place velocity is used for dynamic movement
+  //this. position  is just for its place velocity is used for dynamic movement
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
@@ -147,7 +145,7 @@ class Player {
         circle: {
           ...this,
           velocity: {
-            x: desiredVelocity.x * PIXEL_BUFFER, /// look at chat gpt for explaination
+            x: desiredVelocity.x * PIXEL_BUFFER, 
             y: desiredVelocity.y * PIXEL_BUFFER,
           },
         },
@@ -190,7 +188,7 @@ class Player {
     this.checkTransportOnHorizontalAxis();
   }
 
-  //transport betwwen sections
+  //transport between sections
   checkTransportOnHorizontalAxis() {
     if (this.position.x + this.radius < 0) this.position.x = canvas.width;
     else if (this.position.x - this.radius > canvas.width) this.position.x = 0;
@@ -198,7 +196,6 @@ class Player {
 
   checkTransportOnVerticalAxis() {
     if (this.position.y + this.radius < 0) this.position.y = canvas.height;
-    // This is for the height but i didnt wnat it in the game
     else if (this.position.y - this.radius > canvas.height) this.position.y = 0;
   }
 
@@ -221,7 +218,7 @@ class Player {
     });
   }
 
-  // to update the movment of the pacman so that any computer as a consistent speed
+  // to update the movement of the pacman so that any computer as a consistent speed
   update(delta, boundaries) {
     this.draw();
 
@@ -237,7 +234,7 @@ class Player {
 }
 
 class Ghost {
-  //this.postion  is just for its place velocity is used for dynamic movement
+  //this. position  is just for its place velocity is used for dynamic movement
   static speed = 1; //controls ghost speed
   constructor({
     position,
@@ -310,7 +307,7 @@ class Ghost {
         cropbox.y,
         cropbox.width,
         cropbox.height,
-        this.position.x - cropbox.width, // these two centers the the ghost sprint
+        this.position.x - cropbox.width, // these two centers the ghost sprint
         this.position.y - cropbox.height,
         scaledWidth / this.maxFrames,
         scaledHeight
@@ -459,7 +456,6 @@ class Ghost {
 
   checkTransportOnVerticalAxis() {
     if (this.position.y + this.radius < 0) this.position.y = canvas.height;
-    // This is for the height but i didnt wnat it in the game
     else if (this.position.y - this.radius > canvas.height) this.position.y = 0;
   }
 
@@ -633,7 +629,7 @@ const keys = {
 };
 
 function circleCollidesWithRectangle({ circle, rectangle }) {
-  const padding = Boundary.width / 2 - circle.radius - 2; // this is the invisible shield the walls we used 2 to decrese the shield
+  const padding = Boundary.width / 2 - circle.radius - 2; // this is the invisible shield the walls we used 2 to decrease the shield
 
   return (
     circle.position.y - circle.radius + circle.velocity.y <=
@@ -812,7 +808,7 @@ const game = {
 
     ghostSpeed += GHOST_SPEED_INCREMENT;
     ghostReleaseIntervals = ghostReleaseIntervals.map((interval, index) => {
-      // descreases the time the ghosts come out as levels progress
+      //decreases the time the ghosts come out as levels progress
       if (index === 0) return interval;
       else if (index === 1 && interval > 1) return interval - 1;
       else if (index === 2 && interval > 2) return interval - 1;
