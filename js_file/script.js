@@ -111,15 +111,16 @@ class Player {
     };
   }
 
+  // Checks if moving in the desired direction would crash into any wall
   isValidMove(boundaries) {
-    const PIXEL_BUFFER = 5;
+    const PIXEL_BUFFER = 5; // Small distance to look ahead and check for collisions
     for (const boundary of boundaries) {
       if (
         circleCollidesWithRectangle({
           circle: {
             ...this,
             velocity: {
-              x: this.desiredDirection.x * PIXEL_BUFFER,
+              x: this.desiredDirection.x * PIXEL_BUFFER, // Predict movement a few pixels forward
               y: this.desiredDirection.y * PIXEL_BUFFER,
             },
           },
@@ -132,6 +133,7 @@ class Player {
     return true;
   }
 
+  // Actually tries to move the player based on their input, but checks for walls first
   movePlayerWithInput(delta, boundaries) {
     // Try applying desired direction (for smooth turning)
     const desiredVelocity = {
