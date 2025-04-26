@@ -1,0 +1,167 @@
+﻿<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+  rel="stylesheet"
+/>
+
+<title>PacMan Clone</title>
+<style>
+  body {
+    /* This code also references the body of the page*/
+    background-color: black;
+    margin: 0;
+    padding: 10px 20px;
+    font-family: "Press Start 2P", sans-serif;
+  }
+</style>
+<div
+  class="flex items-center justify-between"
+  style="color: white; margin-bottom: 6px; font-size: 15px"
+>
+  <span><span> Score:</span><span id="scoreEl">0</span></span>
+
+  <div>Lives: <span id="livesEl">3</span></div>
+
+  <!-- Instructions -->
+  <div id="controls" class="text-white text-sm mb-2" style="text-align: center">
+    Use W, A, S, and D to move Pac-Man
+  </div>
+  <!--/instructions-->
+
+  <!-- speaker toggle -->
+  <div
+    id="speakerToggle"
+    class="flex items-center justify-between cursor-pointer w-8 h-8"
+    style="color: white"
+  >
+    <!--speaker ON-->
+    <svg
+      id="speakerOnIcon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="size-8 h-6 cursor-pointer"
+    >
+      <path
+        d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z"
+      />
+      <path
+        d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z"
+      />
+    </svg>
+    <!--/speaker ON-->
+
+    <!--speaker OFF-->
+    <svg
+      id="speakerOffIcon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="size-8 h-6 cursor-pointer hidden"
+    >
+      <path
+        d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z"
+      />
+    </svg>
+    <!--/speaker OFF-->
+  </div>
+
+  <!-- pause icon-->
+  <svg
+    id="pauseButton"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    class="size-8 h-6 cursor-pointer hidden"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM9 8.25a.75.75 0 0 0-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 0 0 .75-.75V9a.75.75 0 0 0-.75-.75H9Zm5.25 0a.75.75 0 0 0-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 0 0 .75-.75V9a.75.75 0 0 0-.75-.75h-.75Z"
+      clip-rule="evenodd"
+    />
+  </svg>
+  <!--/ pause icon-->
+</div>
+
+<div class="relative">
+  <div class="absolute inset-0 flex flex-col items-center justify-center">
+    <div
+      id="startScreen"
+      class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full"
+    >
+      <!--max-width: 300px; width: 100-->
+      <!--gives the transparent look ^^^ -->
+
+      <!--xs sm base lg xl 2xl-->
+      <h1 class="text-white text-3xl mb-2">PacMan</h1>
+
+      <button
+        id="startButton"
+        class="text-black text-sm bg-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300"
+      >
+        Start Game
+      </button>
+    </div>
+
+    <!-- game over screem-->
+    <div
+      id="gameOverScreen"
+      class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full hidden"
+    >
+      <!--max-width: 300px; width: 100-->
+      <!--gives the transparent look ^^^ -->
+
+      <!--xs sm base lg xl 2xl-->
+      <p class="text-white text-xs mb-2">Game Over</p>
+      <h1 id="gameOverScoreLabel" class="text-white text-3xl">Score</h1>
+      <p class="text-white text-[10px] mb-2">Score</p>
+
+      <button
+        id="restartGameButton"
+        class="text-black text-sm bg-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300"
+      >
+        Restart Game
+      </button>
+    </div>
+    <!-- game over screen-->
+
+    <!--ready tag-->
+    <div
+      id="readyTag"
+      class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full hidden"
+    >
+      <h1 class="text-white text-xl">Ready?</h1>
+    </div>
+    <!--/ready tag-->
+
+    <!--go tag-->
+    <div
+      id="goTag"
+      class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full hidden"
+    >
+      <h1 class="text-white text-xl">Go!</h1>
+    </div>
+    <!--/go tag-->
+  </div>
+  <canvas style="display: block; margin: 0 auto"></canvas>
+</div>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"
+  integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+  integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script src="./js_file/audio.js"></script>
+<script src="./js_file/Maps.js"></script>
+<script src="./js_file/script.js"></script>
+
+<!--This code is used to connect Java to html-->
